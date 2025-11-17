@@ -2,7 +2,7 @@ name: Build Docker Image, Deploy to Render
 
 on:
   push:
-    branches: [ main ]
+    branches: [ prime ]
 
 jobs:
   build-and-push:
