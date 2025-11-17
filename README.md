@@ -14,6 +14,23 @@ This way you can have a starting point to compare cpus only by looking at their 
 Please keep in mind that in modern cpu industry there are features that are not considered in the dataset but this could serve as a starting point to gather useful and significant features from modern designs and architectures
 which are used for different purposes not only for gaming
 
+## Notebooks
+
+Go to data folder and decompress the zip file make sure the name of unzipped file is fps_videogames.csv
+
+I uploaded two notebooks to : https://github.com/cleall/ml_zmcmp_hwwrk/tree/prime/midterm_07
+
+#### Random Forests
+```
+    midterm_07_dt_optn_cpu_units_pl contains all the steps to create the model deployed to Render
+```
+
+#### Multiple Linear Regression
+```
+    midterm_mlr_cpu_turbo_pl contains all the steps to create the Linear Regression model 
+```
+They contain the steps I followed to do EDA, create models, tune them and evaluate them.
+
 ## System prerequisites
 
 Python3, version 3.10.12
@@ -64,6 +81,8 @@ Install project dependencies
 ## Local usage from uv
 
 #### Train model and save it
+Go to data folder and decompress the zip file make sure the name of unzipped file is fps_videogames.csv
+
 Go to midterm/ and do
 
 ```bash
