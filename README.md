@@ -69,7 +69,7 @@ Create a folder to clone there
 Clone project to midterm/
 
 ```bash
-    git clone https://github.com/cleall/ml_zmcmp_prjcts.git
+    git clone https://github.com/cleall/midterm.git
 ```
 
 Install project dependencies
