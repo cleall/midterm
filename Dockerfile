@@ -10,6 +10,8 @@ RUN uv sync --locked
 
 COPY "predict.py" "cpu_tf_rfpl_v1.bin" ./
 COPY "response/cpu.py" "response/predict_response.py" ./response/
+COPY "static/styles.css" ./static/
+COPY "web/index.html" ./web/
 
 COPY "entrypoint.sh" /entrypoint.sh
 RUN chmod +x /entrypoint.sh

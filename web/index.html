@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cpu Turbo Frequency Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <h1>Cpu Turbo Frequency Predictor</h1>
+    <h2>Input Features</h2>
+    <form class="input-container" action="/submit" method="post">
+        <label for="cpu_cores_in">Cpu cores:</label>
+        <input class="cpu_cores_in" type="number" name="cpu_cores" placeholder="cpu number of cores">
+        <label for="cpu_threads_in">Cpu threads:</label>
+        <input class="cpu_threads_in" type="number" name="cpu_threads" placeholder="cpu number of threads">
+        <label for="cpu_frq_in">Shading units:</label>
+        <input class="cpu_frq_in" type="number" name="cpu_frq" placeholder="cpu base frequency in GHz">
+        <label for="cpu_multiplier_in">Multiplier:</label>
+        <input class="cpu_multiplier_in" type="number" name="cpu_multiplier" placeholder="ratio of an internal clock rate">
+        <label for="cpu_tdp_in">Cpu tdp:</label>
+        <input class="cpu_tdp_in" type="number" name="cpu_tdp" placeholder="cpu tdp in watts">
+        <label for="cpu_prcss_in">Process node:</label>
+        <input class="cpu_prcss_in" type="number" name="cpu_prcss" placeholder="cpu fabrication process in nm">
+        <label for="cpu_die_in">Die area:</label>
+        <input class="cpu_die_in" type="number" name="cpu_die" placeholder="cpu physical dimensions in mm²">
+        <label for="cpu_has_oc_in">Cpu overclocked [Y/N]:</label>
+        <input class="cpu_has_oc_in" type="number" name="cpu_has_oc" placeholder="is cpu overclocked? Y/N">
+        <button class="submit-btn" type="submit">Predict Cpu Turbo Frequency</button>
+    </form>
+
+    {% if api_response %}
+    <h2>Model Output</h2>
+    <div id="result">
+        <p>Cpu Turbo Frequency: ~{{ api_response.turbo_frequency }} GHz</p>
+    </div>
+    {% endif %}
+    
+</body>
+</html>
