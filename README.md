@@ -72,6 +72,30 @@ Clone project to midterm/
     git clone https://github.com/cleall/midterm.git
 ```
 
+Navigate to project folder
+
+```bash
+    cd midterm
+```
+
+Install python version for project using uv
+
+```bash
+    uv python install 3.10
+```
+
+Create venv using previously installed python version
+
+```bash
+    uv venv --python 3.10
+```
+
+Activate the environment
+
+```bash
+    source .venv/bin/activate
+```
+
 Install project dependencies
 
 ```bash
@@ -115,51 +139,23 @@ Go to midterm/ and do
     .
     INFO:     Uvicorn running on http://0.0.0.0:4444 (Press CTRL+C to quit)
 ```
-The previous command sends a request to test the model
+The previous command sends a request to test the model, by default it points to the local machine.
 
-#### Send a request using dashboard
-You can use
+In case you want to try out other parameters you can use the form accessing the localhost:4444 and below you can see the same features used in [client.py](client.py) just for guidance.
 
-127.0.0.1:4444/docs
-
-0.0.0.0:4444/docs
-
-localhost:4444/docs
-
-just to name a few to load the dashboard using your preferred browser
-```
-    Look for the POST button, go to the end of the line and click the arrow pointing down
-    
-    Click the Try it out button
-
-    Set values of each attribute, do not remove curly braces e.g.
-
-    {
-        "cpu_cores": 4,
-        "cpu_threads": 8,
-        "cpu_frq": 3.5,
-        "cpu_clock": 0.1,
+```python
+    request = {
+        "cpu_cores": 6,
+        "cpu_threads": 12,
+        "cpu_frq": 3.6,
         "cpu_multiplier": 35,
-        "cpu_tdp": 77,
-        "cpu_prcss": 22,
+        "cpu_tdp": 65,
+        "cpu_prcss": 14,
         "cpu_die": 160,
         "cpu_has_oc": "N"
     }
-
-    Brief explanation
-        cpu_cores, cpu_threads, cpu_multiplier, cpu_tdp, cpu_prcss are int positive values
-        cpu_frq, cpu_clock, are int positive values represented in Ghz
-        cpu_die is int positive value represented in mm²
-        cpu_has_oc is a str "Y" or "N" indicates if multiplier is unlocked or not
-    
-    Once ready click the Execute button
-
-    Below you can review the server response e.g.
-
-    {
-        "turbo_frequency": 3.8850742063492056
-    }
 ```
+Once form has been filled click the Predict Cpu Turbo Frequency button.
 
 ## Local usage from Docker
 
@@ -184,7 +180,7 @@ The previous command runs the Dockerimage midterm:latest in interactive mode
 When you want to stop the server simply do CTRL+C
 
 
-## Test Dockerimage
+## Test Docker image
 
 #### Send a request using client.py
 Go to midterm/ and do
@@ -192,113 +188,73 @@ Go to midterm/ and do
 ```bash
     uv run client.py
 ```
-The previous command sends a request to test the model
+The previous command sends a request to test the model, by default it points to the local machine, this time deployed using the docker image
 
-#### Send a request using dashboard
-You can use
+#### Send a request using html form
 
-127.0.0.1:4444/docs
+In case you want to try out other parameters you can use the form accessing the localhost:4444 and below you can see the same features used in [client.py](client.py) just for guidance.
 
-0.0.0.0:4444/docs
-
-localhost:4444/docs
-
-just to name a few to load the dashboard using your preferred browser
-```
-    Look for the POST button, go to the end of the line and click the arrow pointing down
-    
-    Click the Try it out button
-
-    Set values of each attribute, do not remove curly braces e.g.
-
-    {
-        "cpu_cores": 4,
-        "cpu_threads": 8,
-        "cpu_frq": 3.5,
-        "cpu_clock": 0.1,
+```python
+    request = {
+        "cpu_cores": 6,
+        "cpu_threads": 12,
+        "cpu_frq": 3.6,
         "cpu_multiplier": 35,
-        "cpu_tdp": 77,
-        "cpu_prcss": 22,
+        "cpu_tdp": 65,
+        "cpu_prcss": 14,
         "cpu_die": 160,
         "cpu_has_oc": "N"
     }
-
-    Brief explanation
-        cpu_cores, cpu_threads, cpu_multiplier, cpu_tdp, cpu_prcss are int positive values
-        cpu_frq, cpu_clock, are int positive values represented in Ghz
-        cpu_die is int positive value represented in mm²
-        cpu_has_oc is a str "Y" or "N" indicates if multiplier is unlocked or not
-    
-    Once ready click the Execute button
-
-    Below you can review the server response e.g.
-
-    {
-        "turbo_frequency": 3.8850742063492056
-    }
 ```
-You sent a request using the dashboard or docs
 
+Once form has been filled click the Predict Cpu Turbo Frequency button.
 
 # Cloud Deployment
 
-Deployed to Render: https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf_rf
+Deployed to Render (access html form): https://predict-cpu-turbo-frequency.onrender.com
 
-Note: It is going to be running when peer review starts for a few days it is going to be suspended
+When you access the url it loads the form ready to use as in the local tests
+at this point you can choose either form or [client.py](client.py) file.
 
-#### Send a request using client.py
-Go to midterm/ and edit client.py
+#### Send a request using client.py to deployed service
 
-```bash
-    Change url to point to Deployed service on Render
+Send post requests: https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf
 
-    url = "https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf_rf"
+Go to midterm/ and edit [client.py](client.py)
+
+```python
+    #Uncomment url to point to Deployed service on Render and comment the url for local tests
+
+    url = "https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf"
 
     Save and do
     
     uv run client.py
 ```
-The previous command sends a request to test the model
+The previous command sends a request to test the model to the deployed service on render.
 
-#### Send a request using dashboard
-Go to: https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf_rf/docs
-```
-    Look for the POST button, go to the end of the line and click the arrow pointing down
-    
-    Click the Try it out button
+#### Video interacting with Render (first deployment)
 
-    Set values of each attribute, do not remove curly braces e.g.
-
-    {
-        "cpu_cores": 4,
-        "cpu_threads": 8,
-        "cpu_frq": 3.5,
-        "cpu_clock": 0.1,
-        "cpu_multiplier": 35,
-        "cpu_tdp": 77,
-        "cpu_prcss": 22,
-        "cpu_die": 160,
-        "cpu_has_oc": "N"
-    }
-
-    Brief explanation
-        cpu_cores, cpu_threads, cpu_multiplier, cpu_tdp, cpu_prcss are int positive values
-        cpu_frq, cpu_clock, are int positive values represented in Ghz
-        cpu_die is int positive value represented in mm²
-        cpu_has_oc is a str "Y" or "N" indicates if multiplier is unlocked or not
-    
-    Once ready click the Execute button
-
-    Below you can review the server response e.g.
-
-    {
-        "turbo_frequency": 3.8850742063492056
-    }
-```
-You sent a request using the dashboard or docs
-
-#### Video interacting with Render
-
-I recoded a small video interacting with Render and running it locally
+I recoded a small video interacting with Render and running it locally.
 
 Video: [Deployment and local test](https://www.youtube.com/watch?v=5FRstzQELxU)
+
+#### Video interacting with Render (rev1)
+
+I recoded a small video interacting with Render after rev1.
+
+Video: [Render interaction rev1](https://www.youtube.com/watch?v=TY3g0jDsu-w)
+
+#### Deployment to Render
+
+In my first deployment I uploaded docker image to DockerHub and pulled the image from there to render.
+
+This time I pushed the docker image to Github Container Registry (ghcr) and pulled the image from there to render.
+
+I liked the ghcr over the dockerhub because the docker image now requires an access token with read permissions only to be pulled by render, instead of having the image publicly available in dockerhub where surprisingly it is downloaded almost immediately either automated systems or people who like to take advantage of anything at their reach.
+
+The only thing that is a bit misleading in ghcr are the statistics of the package as when render first establish a connection and then deploys the service, each time, it pulls the image and that counts as a download, so if the service restarts or is re-deployed by any other reason that is going to increase the download count.
+
+Check this for steps: [Deploy Docker image to render](https://render.com/docs/deploying-an-image)
+
+Thanks for reviewing my project.
