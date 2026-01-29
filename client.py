@@ -1,6 +1,6 @@
 import requests
 
-url = "http://0.0.0.0:4444/predict_cpu_tf_rf"
+url = "http://0.0.0.0:4444/predict_cpu_tf"
 #url = "https://predict-cpu-turbo-frequency.onrender.com/predict_cpu_tf"
 
 observation = {
